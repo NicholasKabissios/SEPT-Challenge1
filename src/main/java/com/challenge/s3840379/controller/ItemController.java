@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/item")
 public class ItemController {
 
     ItemDao dao = new ItemDao();
@@ -15,8 +16,8 @@ public class ItemController {
         dao.addItem(newItem);
     }
 
-    @GetMapping("/getItem")
-    public String getItem(@RequestParam(value = "id", defaultValue = "asd") String id) {
+    @GetMapping("/getItem/{id}")
+    public String getItem(@PathVariable String id) {
         return dao.getItem(id).toString();
     }
 
@@ -30,7 +31,7 @@ public class ItemController {
         dao.deleteItem(id);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/updateItem")
     public void updateItem(@RequestBody Item newItem) {
         dao.updateItem(newItem);
     }
